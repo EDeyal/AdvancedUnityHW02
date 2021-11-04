@@ -6,7 +6,6 @@ public class Player : MonoBehaviour
 {
     #region Physics and movement
     private Rigidbody _rigidbody;
-    private Camera _camera;
 
     //movement
     public float mouseSensitivity = 200;
@@ -16,11 +15,6 @@ public class Player : MonoBehaviour
     private int _jumpForce = 5;
     private float _horizontalInput;
     private float _verticalInput;
-    float _camRotX;
-    [SerializeField]
-    float _camMaxHightAngle = 60;
-    [SerializeField]
-    float _camMinHightAngle = -60;
     Vector3 _verticalRotation;
     Vector3 _rotation;
 
@@ -55,8 +49,6 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        _camera = GetComponentInChildren<Camera>();
-        _camRotX = _camera.transform.localEulerAngles.x;
         _rigidbody = GetComponent<Rigidbody>();
         _gun = GetComponentInChildren<ParticleSystem>();
         transform.position = new Vector3(22.5f, 2, -22.5f);
@@ -66,7 +58,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         Movement();
-        PlayerLook();
         timer();
         if (Input.GetMouseButtonDown(0))
         {
@@ -117,9 +108,7 @@ public class Player : MonoBehaviour
 
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * mouseSensitivity;
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensitivity;
-        _camRotX -= mouseY;
-        _camRotX = Mathf.Clamp(_camRotX, _camMinHightAngle, _camMaxHightAngle);
-        _camera.transform.localRotation = Quaternion.Euler(_camRotX, _camera.transform.localEulerAngles.y, 0);
+        //_camera.transform.localRotation = Quaternion.Euler(_camRotX, _camera.transform.localEulerAngles.y, 0);
         float rotY = transform.eulerAngles.y;
         rotY += mouseX;
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, rotY, transform.localEulerAngles.z);

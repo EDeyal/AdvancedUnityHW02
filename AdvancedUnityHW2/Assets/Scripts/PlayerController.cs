@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Transform cameraTransform;
+    //Transform cameraTransform;
 
     float verticalLookDirection;
+    [SerializeField]
     CharacterController charController;
     float groundCheckRadius = 0.2f;
     bool isGrounded;
@@ -28,10 +29,10 @@ public class PlayerController : MonoBehaviour
     public Vector3 fallVelocity = Vector3.zero;
     void Start()
     {
-        cameraTransform = Camera.main.transform;
+        //cameraTransform = Camera.main.transform;
         charController = GetComponent<CharacterController>();
         gun = GetComponentInChildren<ParticleSystem>();
-        transform.position = new Vector3(22.5f, 2, -22.5f);
+       // transform.position = new Vector3(22.5f, 2, -22.5f);
         TakeDamage(25);
     }
 
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerLook();
         PlayerMove();
-        PlayerGravity();
+        //PlayerGravity();
         Timer();
         if (Input.GetMouseButtonDown(0))
         {
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
         verticalLookDirection -= mouseY;
 
         verticalLookDirection = Mathf.Clamp(verticalLookDirection, -90f, 90f);
-        cameraTransform.localRotation = Quaternion.Euler(verticalLookDirection, 0f, 0f);
+        //cameraTransform.localRotation = Quaternion.Euler(verticalLookDirection, 0f, 0f);
     }
 
     void PlayerMove()
@@ -113,6 +114,6 @@ public class PlayerController : MonoBehaviour
     {
         currentHP -= damageAmount;
         float hpRatio = (float)currentHP / maxHP;
-        HPBarImage.fillAmount = hpRatio;
+        //HPBarImage.fillAmount = hpRatio;
     }
 }
